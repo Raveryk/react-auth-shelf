@@ -21,6 +21,17 @@ router.post('/', (req, res) => {
  */
 router.delete('/:id', (req, res) => {
   // endpoint functionality
+  let reqId = req.params.id;
+  console.log('Delete request for id', reqId);
+  let sqlText = 'DELETE FROM item WHERE id=$1;';
+  pool.query(sqlText, [reqId])
+  .then((result) => {
+    res.sendStatus(200);
+  })
+  .catch(( err ) => {
+    console.log(`Error making databse query ${sqlText}`, err);
+    res.sendStatus(500)
+  })
 });
 
 /**
