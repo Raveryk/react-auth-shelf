@@ -15,6 +15,26 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
+  const description = req.body.description;
+  const url = req.body.url;
+  const user_id = req.user;
+  console.log(description);
+  console.log(url);
+  console.log(user_id);
+
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user', req.user);
+
+  const queryText = `INSERT INTO item (description, url, user_id) 
+  VALUES ($1, $2, $3);`;
+
+  pool.query(queryText, [description, url, user_id])
+  .then(() => res.sendStatus(201))
+  .catch((error) => {
+    console.log('Error with adding an item', error);
+    res.sendStatus(500);
+  })
+
   // endpoint functionality
 });
 
