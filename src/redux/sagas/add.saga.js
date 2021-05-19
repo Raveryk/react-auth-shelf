@@ -3,7 +3,8 @@ import axios from 'axios';
 
 function* addItem(action){
     try {
-        yield axios.post('/auth_shelf', action.payload);
+        console.log(action.payload);
+        yield axios.post('/api/shelf', action.payload);
         yield put({type: 'GET_SHELF'});
     } catch(error){
         console.log('Error with adding an item', error);

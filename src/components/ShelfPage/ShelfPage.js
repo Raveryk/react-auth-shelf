@@ -1,5 +1,6 @@
-import React from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 
 function ShelfPage() {
@@ -14,7 +15,7 @@ function ShelfPage() {
   }
   const addItem = (event) => {
     event.preventDefault();
-    dispatch({type: 'Add_NEW_ITEM', payload: newItem})
+    dispatch({type: 'ADD_NEW_ITEM', payload: newItem})
 
   }
 
@@ -28,6 +29,7 @@ function ShelfPage() {
         <form onSubmit={addItem}>
           <input onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" />
           <input onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image url" />
+          <button>Add Item</button>
         </form>
       </div>
     </>
