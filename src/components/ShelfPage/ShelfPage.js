@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import '../ShelfPage/ShelfPage.css'
 
 
 function ShelfPage() {
@@ -18,6 +20,13 @@ function ShelfPage() {
 
   }
 
+  const shelf = useSelector(store => store.shelf);
+  console.log(shelf);
+
+  useEffect(() => {
+    dispatch({type: 'GET_SHELF' });
+  }, []);
+
   return (
     <>
       <div className="container">
@@ -30,33 +39,7 @@ function ShelfPage() {
           <input onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image url" />
           <button>Add Item</button>
         </form>
-      </div>
-    </>
-import React, { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-
-import '../ShelfPage/ShelfPage.css'
-
-function ShelfPage() {
-
-
-  const dispatch = useDispatch();
-
-
-  const shelf = useSelector(store => store.shelf);
-  console.log(shelf);
-
-  useEffect(() => {
-    dispatch({type: 'GET_SHELF' });
-  }, []);
-
-  
-
-
-  return (
-    <div className="container">
-      <h2>Shelf</h2>
-      <div>
+        <div>
         <ul>
           {shelf.map((item, i) => {
             return (<li key={i}>{item.description}:<img className="images" src={item.image_url}/></li>)
@@ -64,8 +47,35 @@ function ShelfPage() {
           })}
         </ul>
       </div>
-    </div>
-  );
+      </div>
+    </>
+  )
+
 }
+
+
+// function ShelfPage() {
+
+
+//   const dispatch = useDispatch();
+
+
+//   const shelf = useSelector(store => store.shelf);
+//   console.log(shelf);
+
+//   useEffect(() => {
+//     dispatch({type: 'GET_SHELF' });
+//   }, []);
+
+  
+
+
+//   return (
+//     <div className="container">
+//       <h2>Shelf</h2>
+      
+//     </div>
+//   );
+// }
 
 export default ShelfPage;
