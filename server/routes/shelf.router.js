@@ -9,7 +9,7 @@ const {
  */
 router.get('/', (req, res) => {
 
-  const query = `SELECT description, image_url FROM "item";`
+  const query = `SELECT * FROM "item";`
   pool.query(query)
     .then( result => {
       console.log(result.rows)

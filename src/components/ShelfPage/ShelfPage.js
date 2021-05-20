@@ -42,7 +42,8 @@ function ShelfPage() {
         <div>
         <ul>
           {shelf.map((item, i) => {
-            return (<li key={i}>{item.description}:<img className="images" src={item.image_url}/></li>)
+            return (<li key={i}>{item.description}:<img className="images" src={item.image_url}/>
+            <button onClick={()=> dispatch({type:'DELETE_ITEM', payload: item.id})}>Remove</button></li>)
                     
           })}
         </ul>
