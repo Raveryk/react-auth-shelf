@@ -18,11 +18,16 @@ function ShelfPage() {
   const addItem = (event) => {
     event.preventDefault();
     dispatch({type: 'ADD_NEW_ITEM', payload: newItem})
-
+    clearFields();
   }
 
+const clearFields = () => {
+  setDescription('');
+  setUrl('');
+}
+
   const shelf = useSelector(store => store.shelf);
-  console.log(shelf);
+  //console.log(shelf);
 
   useEffect(() => {
     dispatch({type: 'GET_SHELF' });
