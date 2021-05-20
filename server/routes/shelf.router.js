@@ -54,7 +54,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
  */
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
-  console.log('Delete request for id', reqId);
+  // console.log('Delete request for id', reqId);
   let sqlText = `DELETE FROM item WHERE user_id = $1;`;
   pool.query(sqlText, [req.user.id])
   .then((result) => {
