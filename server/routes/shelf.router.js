@@ -53,8 +53,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-  // endpoint functionality
-
   console.log(req.params.id);
 
   console.log('Delete request for id', req.params.id);
@@ -67,6 +65,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       console.log(`Error making databse query ${sqlText}`, err);
       res.sendStatus(500)
     })
+
 });
 
 
