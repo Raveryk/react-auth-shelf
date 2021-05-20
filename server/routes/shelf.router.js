@@ -11,11 +11,11 @@ router.get('/', (req, res) => {
 
   const query = `SELECT * FROM "item";`
   pool.query(query)
-    .then( result => {
+    .then(result => {
       console.log(result.rows)
       res.send(result.rows)
     })
-    .catch( error => {
+    .catch(error => {
       console.log('Error GETting items from shelf.', error);
       res.sendStatus(500);
     })
@@ -40,11 +40,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   VALUES ($1, $2, $3);`;
 
   pool.query(queryText, [description, image_url, user_id])
-  .then(() => res.sendStatus(201))
-  .catch((error) => {
-    console.log('Error with adding an item', error);
-    res.sendStatus(500);
-  })
+    .then(() => res.sendStatus(201))
+    .catch((error) => {
+      console.log('Error with adding an item', error);
+      res.sendStatus(500);
+    })
 
   // endpoint functionality
 });
@@ -53,18 +53,21 @@ router.post('/', rejectUnauthenticated, (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-  // endpoint functionality
-  // console.log('Delete request for id', reqId);
-  let sqlText = `DELETE FROM item WHERE user_id = $1;`;
-  pool.query(sqlText, [req.user.id])
-  .then((result) => {
-    res.sendStatus(200);
-  })
-  .catch(( err ) => {
-    console.log(`Error making databse query ${sqlText}`, err);
-    res.sendStatus(500)
-  })
+  console.log(req.params.id);
+
+  console.log('Delete request for id', req.params.id);
+  let sqlText = `DELETE FROM item WHERE id = $1 AND user_id = ${req.user.id};`;
+  pool.query(sqlText, [req.params.id])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(`Error making databse query ${sqlText}`, err);
+      res.sendStatus(500)
+    })
+
 });
+
 
 /**
  * Update an item if it's something the logged in user added
