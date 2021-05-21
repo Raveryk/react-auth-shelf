@@ -15,16 +15,17 @@ function ShelfPage() {
     description: description,
     url: url,
   }
+
   const addItem = (event) => {
     event.preventDefault();
     dispatch({type: 'ADD_NEW_ITEM', payload: newItem})
     clearFields();
   }
 
-const clearFields = () => {
-  setDescription('');
-  setUrl('');
-}
+  const clearFields = () => {
+    setDescription('');
+    setUrl('');
+  }
 
   const shelf = useSelector(store => store.shelf);
   //console.log(shelf);
